@@ -104,3 +104,11 @@ jobs:
       with:
         name: Padavan-packages1
         path: /opt/images
+    - name: Upload Firmware to Github Release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: /opt/images/*
+        tag: ${{ github.ref }}
+        overwrite: true
+        file_glob: true

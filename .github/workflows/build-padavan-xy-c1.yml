@@ -90,6 +90,17 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
         echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> .config
         #########################################################################################
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DROPBEAR/d' .config
+        echo "CONFIG_FIRMWARE_INCLUDE_DROPBEAR=y" >> .config 
+        ### Include NFSv3 server. ~0.6MB
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NFSD/d' .config
+        echo "CONFIG_FIRMWARE_INCLUDE_NFSD=y" >> .config
+        ### Include NFSv3 client. ~0.5MB
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NFSC/d' .config
+        echo "CONFIG_FIRMWARE_INCLUDE_NFSC=y" >> .config
+        #########################################################################################
+
+        
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
         #sed -i '/自定义项/d' .config
@@ -109,6 +120,6 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: /opt/images/*
-        tag: ${{ github.ref }}
+        tag: image
         overwrite: true
         file_glob: true

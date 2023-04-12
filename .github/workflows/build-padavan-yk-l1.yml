@@ -121,6 +121,6 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: /opt/images/*
-        tag: ${{ github.ref }}
+        tag: image
         overwrite: true
         file_glob: true
